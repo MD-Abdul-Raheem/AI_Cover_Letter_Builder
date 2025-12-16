@@ -11,11 +11,11 @@ CRITICAL RULES:
 5. End the letter specifically with the closing 'Regards,' followed by the Candidate Name. The Candidate Name MUST be formatted in Title Case (e.g., 'John Doe') and NOT ALL CAPS, even if the resume uses uppercase. If the name is not explicitly provided in the inputs, you MUST extract it from the Resume Content. Do not use generic placeholders like "A Job Applicant".`;
 
 export const generateCoverLetter = async (request: CoverLetterRequest): Promise<string> => {
-  if (!process.env.API_KEY) {
+  if (!import.meta.env.VITE_GEMINI_API_KEY) {
     throw new Error("API Key is missing.");
   }
 
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
 
   // Logic: If candidateName is empty (auto-extract failed), specifically instruct the model to find it in the resume text.
   const nameContext = request.candidateName && request.candidateName.trim() !== ''
