@@ -162,20 +162,9 @@ const App: React.FC = () => {
         <div className="flex flex-col items-center justify-center space-y-3 sm:space-y-4 px-4">
           <button
             onClick={handleGenerate}
-            disabled={!isFormValid || isLoading}
-            className={`
-              relative group flex items-center justify-center space-x-2 sm:space-x-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold transition-all duration-300 w-full sm:w-auto max-w-md
-              ${!isFormValid || isLoading 
-                ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700' 
-                : 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-lg shadow-primary-900/40 hover:shadow-primary-600/40 hover:scale-105 active:scale-95 border border-transparent'
-              }
-            `}
+            disabled={isLoading}
+            className="relative group flex items-center justify-center space-x-2 sm:space-x-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold transition-all duration-300 w-full sm:w-auto max-w-md bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-lg shadow-primary-900/40 hover:shadow-primary-600/40 hover:scale-105 active:scale-95 border border-transparent disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
-             {/* Gradient Border Hack for nice glow */}
-            {!isFormValid && !isLoading && (
-               <div className="absolute inset-0 rounded-full border border-slate-700"></div>
-            )}
-            
             {isLoading ? (
               <>
                 <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
