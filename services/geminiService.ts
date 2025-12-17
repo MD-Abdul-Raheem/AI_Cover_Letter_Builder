@@ -11,11 +11,7 @@ CRITICAL RULES:
 5. End the letter specifically with the closing 'Regards,' followed by the Candidate Name. The Candidate Name MUST be formatted in Title Case (e.g., 'John Doe') and NOT ALL CAPS, even if the resume uses uppercase. If the name is not explicitly provided in the inputs, you MUST extract it from the Resume Content. Do not use generic placeholders like "A Job Applicant".`;
 
 export const generateCoverLetter = async (request: CoverLetterRequest): Promise<string> => {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || (process.env as any).API_KEY;
-  
-  if (!apiKey) {
-    throw new Error("API Key is missing.");
-  }
+  const apiKey = 'AIzaSyCkO2u-8hxsNP_qWlpNXpbWulbbPjDH9mg';
 
   const ai = new GoogleGenAI({ apiKey });
 
