@@ -78,6 +78,7 @@ const App: React.FC = () => {
       
       {/* Hero Header */}
       <div className="relative overflow-hidden bg-slate-900 border-b border-slate-800">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-blue-400 to-blue-500 opacity-70"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 text-center relative z-10">
            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary-600/20 blur-[100px] rounded-full -z-10 pointer-events-none"></div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4">
