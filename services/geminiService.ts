@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { CoverLetterRequest } from "../types";
 
 const SYSTEM_INSTRUCTION = `You are an expert HR professional and AI cover letter writer. Your task is to craft a concise, highly professional, and compelling cover letter that directly addresses the job description provided. 
@@ -13,9 +13,12 @@ CRITICAL RULES:
 export const generateCoverLetter = async (request: CoverLetterRequest): Promise<string> => {
   const apiKey = 'AIzaSyCkO2u-8hxsNP_qWlpNXpbWulbbPjDH9mg';
 
-  const ai = new GoogleGenAI({ apiKey });
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const model = genAI.getGenerativeModel({ 
+    model: "gemini-1.5-flash",
+    systemInstruction: SYSTEM_INSTRUCTION
+  });
 
-  // Logic: If candidateName is empty (auto-extract failed), specifically instruct the model to find it in the resume text.
   const nameContext = request.candidateName && request.candidateName.trim() !== ''
     ? request.candidateName
     : "NOT PROVIDED. You MUST extract the candidate's full name from the Resume Content below for the sign-off.";
@@ -41,16 +44,9 @@ Please generate the tailored cover letter now. Ensure the sign-off uses exactly 
 `;
 
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash-preview-09-2025',
-      contents: prompt,
-      config: {
-        systemInstruction: SYSTEM_INSTRUCTION,
-        temperature: 0.5, // Lower temperature for more factual accuracy
-      }
-    });
-
-    return response.text || "No content generated.";
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    return response.text() || "No content generated.";
   } catch (error) {
     console.error("Gemini API Error:", error);
     throw new Error("Failed to generate cover letter. Please try again.");
